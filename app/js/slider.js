@@ -1,3 +1,4 @@
+//Services slider
 $(window).on("load resize orientationchange", function () {
     $(".slider").each(function () {
         var $slider = $(this);
@@ -11,63 +12,98 @@ $(window).on("load resize orientationchange", function () {
                     slidesToShow: 2,
                     slidesToScroll: 1,
                     arrows: false,
-                    // centerMode: true,
-                    dots: true
-                    // mobileFirst: true
+                    centerMode: true,
+                    dots: true,
+                    responsive: [
+                        {
+                            breakpoint: 550,
+                            settings: {
+                                slidesToShow: 1.075,
+                                slidesToScroll: 1,
+                                centerMode: true,
+                                adaptiveHeight: true,
+                                centerPadding: '30px',
+                                infinite: true
+                            }
+                        },
+                        {
+                            breakpoint: 420,
+                            settings: {
+                                slidesToShow: 1.1,
+                                slidesToScroll: 1,
+                                centerMode: true,
+                                adaptiveHeight: true,
+                                centerPadding: '30px',
+                                infinite: true
+                            }
+                        },
+                    ]
                 });
             }
         }
     });
 });
 
-$(".coaches-list").slick({
-    nextArrow: '<img class="slick-btn slick-next" src="./img/rightArrow.svg" alt="right arrow"/>',
-    prevArrow: '<img class="slick-btn slick-prev" src="./img/rightArrow.svg" alt="left arrow"/>',
-    infinite: false,
-    slidesToShow: 2,
-    slidesToScroll: 2,
-    responsive: [
-        {
-            breakpoint: 1200,
-            settings: {
-                slidesToShow: 1,
-                slidesToScroll: 1,
-                centerMode: true
-            }
-        },
-        {
-            breakpoint: 768,
-            settings: {
-                slidesToShow: 1,
-                slidesToScroll: 1,
-                centerMode: true,
-                dots: true
-            }
-        }
-    ]
-});
+//Coaches slider
+var $slider = $('.coaches-list');
+var $sliderContainer = $('.coaches');
 
-$(".slider").slick({
-    slidesToShow: 2,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 2500,
-    arrows: false,
-    dots: true,
-    variableWidth: true,
-    responsive: [
-        {
-            breakpoint: 768,
-            settings: "unslick",
-            dots: true,
-            slidesToShow: 2,
-            slidesToScroll: 1,
-            centerMode: false
-        },
-        {
-            breakpoint: 376,
-            slidesToShow: 1,
-            slidesToScroll: 1,
-        }
-    ]
-});
+if ($slider) {
+    var currentSlide;
+    var slidesCount;
+    var sliderCounter = document.createElement('div');
+    sliderCounter.classList.add('coaches__counter');
+
+    var updateSliderCounter = function (slick, currentIndex) {
+        var slidesToScroll = slick.slickGetOption("slidesToScroll");
+        currentSlide = (slick.slickCurrentSlide() + slidesToScroll) / slidesToScroll;
+        slidesCount = slick.slideCount / slidesToScroll;
+        $(sliderCounter).text(currentSlide + ' of ' + slidesCount)
+    };
+
+    $slider.on('init', function (event, slick) {
+        $sliderContainer.append(sliderCounter);
+        updateSliderCounter(slick);
+    });
+
+    $slider.on('afterChange', function (event, slick, currentSlide) {
+        updateSliderCounter(slick, currentSlide);
+    });
+
+    $slider.slick({
+        nextArrow: '<img class="slick-btn slick-next" src="./img/rightArrow.svg" alt="right arrow"/>',
+        prevArrow: '<img class="slick-btn slick-prev" src="./img/rightArrow.svg" alt="left arrow"/>',
+        infinite: false,
+        slidesToShow: 2,
+        slidesToScroll: 2,
+        responsive: [
+            {
+                breakpoint: 1200,
+                settings: {
+                    slidesToShow: 1.25,
+                    slidesToScroll: 1,
+                    centerMode: true
+                }
+            },
+            {
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 2.15,
+                    slidesToScroll: 2,
+                    adaptiveHeight: true,
+                    dots: true
+                }
+            },
+            {
+                breakpoint: 550,
+                settings: {
+                    slidesToShow: 1.2,
+                    slidesToScroll: 1,
+                    adaptiveHeight: true,
+                    dots: true
+                }
+            }
+        ]
+    });
+}
+

@@ -1,0 +1,41 @@
+body {
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+  line-height: 24px;
+  overflow-x: hidden;
+}
+
+.container {
+  max-width: 1380px;
+  padding: 0px 15px;
+  margin: 0 auto;
+}
+
+.btn {
+  font-family: "Montserrat", sans-serif;
+  border: 2px solid black;
+  border-radius: 3px;
+  padding: 6px 40px;
+  font-weight: 600;
+  background-color: transparent;
+  transition: all 0.3s;
+  max-height: 36px;
+}
+
+.btn--large {
+  padding: 11px 40px;
+  min-height: 46px;
+}
+
+.sect-title {
+  font-weight: bold;
+  font-size: 36px;
+  margin-bottom: 24px;
+  line-height: 1;
+}
+
+.sect-info {
+  width: 75%;
+  line-height: 25px;
+  margin-bottom: 48px;
+}

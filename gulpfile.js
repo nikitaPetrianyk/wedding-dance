@@ -10,15 +10,13 @@ var gulp = require('gulp'),
     iconfontCss = require('gulp-iconfont-css'),
     notify = require("gulp-notify");
 
-// Сервер и автообновление страницы Browsersync
+
 gulp.task('browser-sync', function () {
     browserSync({
         server: {
             baseDir: 'app'
         },
         notify: false,
-        // tunnel: true,
-        // tunnel: "projectmane", //Demonstration page: http://projectmane.localtunnel.me
     });
 });
 
@@ -60,12 +58,9 @@ gulp.task('watch', function () {
 var fontName = 'icons';
 // add svg icons to the folder "icons" and use 'iconfont' task for generating icon font
 gulp.task('iconfont', async () => {
-    // где лежат наши иконки
     gulp.src('app/icons/*.svg')
         .pipe(iconfontCss({
-            // где будет наш scss файл
             targetPath: '../sass/_icons.scss',
-            // пути подлючения шрифтов см. в _icons.scss
             fontPath: '../iconfonts/',
             fontName: fontName
 
@@ -76,7 +71,6 @@ gulp.task('iconfont', async () => {
             normalize: true,
             fontHeight: 1001
         }))
-        // куда выбрасываем нашу папку с шрифтами
         .pipe(gulp.dest('app/iconfonts'))
 });
 

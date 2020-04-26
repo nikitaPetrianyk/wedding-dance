@@ -52,36 +52,20 @@ $btn-color: #ff699f;
   }
 }
 
-//common styles
-.sect-title {
-  font-weight: bold;
-  font-size: 36px;
-  margin-bottom: 24px;
-  line-height: 1;
-}
-
-.sect-info {
-  width: 75%;
-  line-height: 25px;
-  margin-bottom: 48px;
-}
-//
-
-// .card-list__item .slick-slide {
-//   height: auto;
-//   height: 450px;
-// }
-
 .cards-list {
   display: flex;
   justify-content: space-between;
+
+  .slider__item + .slider__item {
+    margin-left: 20px;
+  }
 
   &__item {
     transition: all 1s;
     cursor: pointer;
     border: 1px solid rgba(0, 0, 0, 0.04);
     border-radius: 2px;
-    width: 420px;
+    height: 100%;
     box-shadow: 0px 4px 30px rgba(207, 207, 207, 0.25);
   }
 
@@ -89,8 +73,8 @@ $btn-color: #ff699f;
     transform: scale(1.05);
   }
 
-  &__item + &__item {
-    margin-left: 17px;
+  &__item:not(:first-child) {
+    margin-left: 20px;
   }
 
   &__info-wrap {
@@ -120,16 +104,15 @@ $btn-color: #ff699f;
   justify-content: space-between;
   flex-wrap: wrap;
   &__item {
-    width: 350px;
+    width: calc(25% - 16px);
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 65px;
+    margin: 0px 8px 65px 8px;
     cursor: pointer;
     transition: 0.7s ease-out;
     text-align: center;
   }
-
   &__item:hover {
     transform: scale(1.15);
   }
@@ -146,44 +129,43 @@ $btn-color: #ff699f;
   &__counter {
     position: absolute;
     bottom: -50px;
-    left: 49%;
+    left: 48%;
   }
 }
 
 //Coaches slick-slider
-.coaches-list .slick-slide {
-  display: flex;
-}
+.coaches-list {
+  .slick-slide {
+    display: flex;
+  }
 
-.slick-list {
-  position: relative;
-  display: block;
-  overflow: hidden;
-  margin: 0;
-  padding: 0;
-}
+  .slick-btn {
+    position: absolute;
+    width: 40px;
+    height: 28px;
+    z-index: 100;
+    top: auto;
+    bottom: -65px;
+  }
 
-.slick-btn {
-  position: absolute;
-  width: 40px;
-  height: 28px;
-  z-index: 100;
-  top: auto;
-  bottom: -65px;
-}
+  .slick-btn.slick-disabled {
+    cursor: default;
+    opacity: 0.25;
+  }
 
-.slick-btn.slick-disabled {
-  cursor: default;
-  opacity: 0.25;
-}
+  .slick-prev {
+    bottom: -52px;
+    left: calc(50% - 90px);
+    transform: rotate(180deg);
+  }
 
-.coaches-list .slick-prev {
-  bottom: -52px;
-  left: 45%;
-  transform: rotate(180deg);
-}
-.coaches-list .slick-next {
-  right: 44%;
+  .slick-next {
+    left: calc(50% + 50px);
+  }
+
+  .slick-list {
+    margin-right: -23px;
+  }
 }
 //
 
@@ -193,10 +175,13 @@ $btn-color: #ff699f;
   width: 100%;
   max-height: 640px;
   height: 100%;
+  margin: 0px -8px;
 
   &__item {
     display: flex;
-    width: 640px;
+    max-width: 675px;
+    width: 100%;
+    margin: 0px 8px;
     border: 1px solid rgba(0, 0, 0, 0.04);
     box-shadow: 0px 4px 30px rgba(207, 207, 207, 0.25);
     border-radius: 2px;
@@ -216,7 +201,8 @@ $btn-color: #ff699f;
     font-size: 24px;
     background-color: transparent;
     outline: none;
-    padding: 0px 7px;
+    width: 33px;
+    height: 33px;
     display: none;
     transition: 0.7s all;
     position: absolute;
@@ -225,8 +211,18 @@ $btn-color: #ff699f;
   }
 
   &__btn--hidden:hover {
-    color: black;
-    border-color: black;
+    background-color: black;
+  }
+
+  &__btn--hidden:before {
+    content: "\E009";
+    font-family: "icons";
+    font-size: 23px;
+    font-weight: bold;
+    position: absolute;
+    left: 40%;
+    top: 10%;
+    color: $btn-color;
   }
 
   &__number {
@@ -268,10 +264,27 @@ $btn-color: #ff699f;
   }
 }
 
+@media (max-width: 1200px) {
+  .coaches-list {
+    .slick-list {
+      margin-left: -50px;
+    }
+  }
+}
+
 @media (max-width: 1025px) {
+  .info,
+  .services {
+    margin-bottom: 56px;
+  }
+
   .info {
     flex-direction: column;
     height: auto;
+
+    &__title {
+      margin-top: 32px;
+    }
 
     &__text-wrap {
       order: 2;
@@ -280,9 +293,27 @@ $btn-color: #ff699f;
     &__img-wrap {
       order: 1;
       height: 395px;
-      width: 100%;
+      width: 100vw;
+      margin-left: -15px;
       background-size: cover;
     }
+  }
+
+  .cards-list__item-title {
+    font-size: 20px;
+  }
+
+  .cards-list__item-text {
+    font-size: 14px;
+  }
+
+  .coaches-list .slick-prev {
+    bottom: -52px;
+    left: calc(50% - 80px);
+    transform: rotate(180deg);
+  }
+  .coaches-list .slick-next {
+    left: calc(50% + 60px);
   }
 }
 
@@ -290,11 +321,9 @@ $btn-color: #ff699f;
   //Common styles
   .info,
   .services,
-  .offer,
   .coaches {
     margin-bottom: 60px;
   }
-
   .sect-info {
     font-size: 14px;
     width: 90%;
@@ -308,9 +337,14 @@ $btn-color: #ff699f;
       line-height: 1;
       margin: 40px 0px 20px 0px;
     }
+
     &__subtitle {
       font-size: 20px;
       margin-bottom: 25px;
+    }
+
+    &__img-wrap {
+      max-height: 300px;
     }
 
     &__text {
@@ -320,13 +354,37 @@ $btn-color: #ff699f;
   }
 
   .cards-list {
-    padding-bottom: 20px;
+    margin-left: -50px;
+
+    //Slick slider styles
+    .slick-list {
+      margin-right: -15px;
+    }
+
+    .slick-slide {
+      height: auto;
+    }
+
+    .slick-dots li {
+      transform: translate(35px, -15px);
+    }
+
+    .slick-list .slick-track {
+      display: flex;
+      padding-bottom: 30px;
+    }
+    //
 
     &__item {
-      height: 520px;
-      width: 285px;
+      max-height: 490px;
+      height: 100%;
       cursor: grabbing;
     }
+
+    &__item-img {
+      max-height: 300px;
+    }
+
     &__item-title {
       font-size: 18px;
     }
@@ -334,16 +392,12 @@ $btn-color: #ff699f;
     &__item-text {
       font-size: 13px;
     }
-
-    &__item-img {
-      max-width: 285px;
-      max-height: 285px;
-    }
   }
 
   .offer-list {
     &__item {
-      width: 240px;
+      width: calc(45% - 16px);
+      margin-bottom: 40px;
     }
     &__item-title {
       font-size: 14px;
@@ -351,57 +405,90 @@ $btn-color: #ff699f;
   }
 
   .offer-ico {
-    font-size: 40px;
+    font-size: 50px;
     line-height: 1;
   }
 
   .coaches-list {
     height: 590px;
 
+    //Slick-slider styles
+    .slick-list {
+      margin-left: 0;
+    }
+    .slick-dots li {
+      transform: translate(10px, -15px);
+    }
+    .slick-slide {
+      display: block;
+      height: auto;
+    }
+    .slick-arrow {
+      visibility: hidden;
+    }
+    //
+
     &__item {
       max-height: 570px;
+      width: 95%;
+      display: block;
     }
+
     &__img {
-      max-height: 305px;
+      max-height: 300px;
+      height: 100%;
+      width: 100%;
     }
+
     &__info-wrap {
       padding: 16px 0px 32px 16px;
     }
+
     &__btn {
       display: none;
     }
+
     &__btn--hidden {
       display: block;
     }
+
     &__number {
       font-size: 12px;
     }
+
     &__title {
       font-size: 18px;
       margin: 0;
     }
+
     &__profile {
       margin-bottom: 16px;
     }
+
     &__text {
       font-size: 13px;
     }
   }
-  .coaches-list .slick-slide {
-    display: block;
-    height: auto;
-  }
+
   .coaches__counter {
     display: none;
-  }
-  .coaches-list .slick-arrow {
-    visibility: hidden;
   }
 }
 
 @media (max-width: 550px) {
-  .offer-list__item {
-    width: 175px;
+  .cards-list {
+    margin-left: 0;
+    .slick-dots li {
+      transform: translate(8px, -15px);
+    }
+  }
+
+  .cards-list__item {
+    width: 90%;
+  }
+
+  .coaches-list__item {
+    width: 85%;
   }
 }
 
@@ -414,26 +501,60 @@ $btn-color: #ff699f;
       margin-bottom: 25px;
     }
   }
+
+  //Common styles
+  .sect-title {
+    font-size: 24px;
+    margin-bottom: 12px;
+  }
+  .sect-info {
+    width: 95%;
+  }
+  //
+
   .info {
     &__title {
       font-size: 36px;
       line-height: 1;
       margin-bottom: 10px;
+      width: 75%;
     }
 
     &__subtitle {
       font-size: 14px;
       margin-bottom: 18px;
+      font-weight: 500;
     }
   }
-  .offer-list {
+
+  .cards-list {
+    margin-left: -12px;
     &__item {
-      width: 120px;
+      max-width: 285px;
+      width: 100%;
+      margin: 0px 12px;
+    }
+    &__info-wrap {
+      padding: 24px 0px 0px 14px;
     }
     &__item-title {
-      font-size: 13px;
+      margin-bottom: 16px;
+    }
+    &__item-text {
+      margin: 0;
     }
   }
+
+  .offer {
+    margin-bottom: 0;
+  }
+
+  .offer-list {
+    &__item-title {
+      font-size: 14px;
+    }
+  }
+
   .coaches-list {
     &__item {
       width: 90%;
