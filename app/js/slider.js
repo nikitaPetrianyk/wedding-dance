@@ -47,22 +47,20 @@ $(window).on("load resize orientationchange", function () {
 //Coaches slider
 var $slider = $('.coaches-list');
 var $sliderContainer = $('.coaches');
+var $sliderCounter = $('.coaches__counter');
 
 if ($slider) {
     var currentSlide;
     var slidesCount;
-    var sliderCounter = document.createElement('div');
-    sliderCounter.classList.add('coaches__counter');
 
     var updateSliderCounter = function (slick, currentIndex) {
         var slidesToScroll = slick.slickGetOption("slidesToScroll");
         currentSlide = (slick.slickCurrentSlide() + slidesToScroll) / slidesToScroll;
         slidesCount = slick.slideCount / slidesToScroll;
-        $(sliderCounter).text(currentSlide + ' of ' + slidesCount)
+        $sliderCounter.text(currentSlide + ' of ' + slidesCount)
     };
 
     $slider.on('init', function (event, slick) {
-        $sliderContainer.append(sliderCounter);
         updateSliderCounter(slick);
     });
 
