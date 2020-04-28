@@ -86,7 +86,7 @@ if ($slider) {
                 }
             },
             {
-                breakpoint: 768,
+                breakpoint: 769,
                 settings: {
                     slidesToShow: 2.15,
                     slidesToScroll: 2,
