@@ -177,6 +177,11 @@ $btn-color: #ff699f;
   height: 100%;
   margin: 0px -8px;
 
+  .slick-list {
+    padding-bottom: 33px;
+    margin-bottom: -33px;
+  }
+
   &__item {
     display: flex;
     max-width: 675px;
@@ -268,6 +273,10 @@ $btn-color: #ff699f;
   .coaches-list {
     .slick-list {
       margin-left: -50px;
+      margin-bottom: -33px;
+    }
+    &__item-wrap {
+      margin-bottom: 33px;
     }
   }
 }
