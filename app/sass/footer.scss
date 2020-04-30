@@ -18,3 +18,12 @@
     margin-top: 60px;
   }
 }
+
+@media (max-width: 420px) {
+  .site-footer__title {
+    font-size: 17px;
+  }
+  .site-footer__privacy {
+    font-size: 14px;
+  }
+}

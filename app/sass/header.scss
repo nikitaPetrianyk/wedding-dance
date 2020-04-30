@@ -125,7 +125,6 @@ $btn-color: #ff699f;
     &__content {
       display: none;
     }
-
     //Opened menu
     &--opened {
       flex-direction: column;
@@ -151,7 +150,6 @@ $btn-color: #ff699f;
         animation: appear 0.55s ease-in-out;
         border-bottom: 4px solid $btn-color;
         padding-left: 25px;
-        min-height: 660px;
         background-image: url(../img/Menu.jpg);
         background-position: right top;
         background-size: contain;
